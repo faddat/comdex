@@ -71,22 +71,24 @@ func (m msgServer) Withdraw(goCtx context.Context, msg *types.MsgWithdraw) (*typ
 func (m msgServer) LimitOrder(goCtx context.Context, msg *types.MsgLimitOrder) (*types.MsgLimitOrderResponse, error) {
 	ctx := sdk.UnwrapSDKContext(goCtx)
 
-	if _, err := m.Keeper.LimitOrder(ctx, msg); err != nil {
+	order, err := m.Keeper.LimitOrder(ctx, msg)
+	if err != nil {
 		return nil, err
 	}
 
-	return &types.MsgLimitOrderResponse{}, nil
+	return &types.MsgLimitOrderResponse{OrderId: order.Id}, nil
 }
 
 // MarketOrder defines a method to making a market order.
 func (m msgServer) MarketOrder(goCtx context.Context, msg *types.MsgMarketOrder) (*types.MsgMarketOrderResponse, error) {
 	ctx := sdk.UnwrapSDKContext(goCtx)
 
-	if _, err := m.Keeper.MarketOrder(ctx, msg); err != nil {
+	order, err := m.Keeper.MarketOrder(ctx, msg)
+	if err != nil {
 		return nil, err
 	}
 
-	return &types.MsgMarketOrderResponse{}, nil
+	return &types.MsgMarketOrderResponse{OrderId: order.Id}, nil
 }
 
 // CancelOrder defines a method to cancel an order.

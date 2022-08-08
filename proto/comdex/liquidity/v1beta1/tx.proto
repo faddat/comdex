@@ -142,7 +142,9 @@ message MsgLimitOrder {
 }
 
 // MsgLimitOrderResponse defines the Msg/LimitOrder response type.
-message MsgLimitOrderResponse {}
+message MsgLimitOrderResponse {
+  uint64 order_id = 1;
+}
 
 // MsgMarketOrder defines an SDK message for making a market order
 message MsgMarketOrder {
@@ -171,7 +173,9 @@ message MsgMarketOrder {
 }
 
 // MsgMarketOrderResponse defines the Msg/MarketOrder response type.
-message MsgMarketOrderResponse {}
+message MsgMarketOrderResponse {
+  uint64 order_id = 1;
+}
 
 // MsgCancelOrder defines an SDK message for cancelling an order
 message MsgCancelOrder {
