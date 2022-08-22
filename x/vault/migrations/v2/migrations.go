@@ -18,3 +18,25 @@ func MigrateStore(ctx sdk.Context, storeKey storetypes.StoreKey, cdc codec.Binar
 
 	return migrateVault(store, cdc)
 }
+
+func migrateVault(store sdk.KVStore, cdc codec.BinaryCodec) error {
+	oldStoreIter := store.Iterator(nil, nil)
+
+	for ; oldStoreIter.Valid(); oldStoreIter.Next() {
+		oldKey := oldStoreIter.Key()
+		oldVal := store.Get(oldKey)
+
+		newKey, newVal := migrateValue(cdc, oldKey, oldVal)
+		store.Set(newKey, newVal)
+		store.Delete(oldKey) // Delete old key, value
+	}
+
+	return nil
+}
+
+func migrateValue(cdc codec.BinaryCodec, oldKey []byte, oldVal []byte) (newKey []byte, newVal []byte) {
+
+	newKey = types.GetValueKey(string(oldKey))
+	newVal = cdc.MustMarshal(&valWithMemo)
+	return
+}
