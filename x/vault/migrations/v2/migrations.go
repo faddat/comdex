@@ -5,10 +5,9 @@ import (
 	"github.com/cosmos/cosmos-sdk/codec"
 	storetypes "github.com/cosmos/cosmos-sdk/store/types"
 	sdk "github.com/cosmos/cosmos-sdk/types"
-	paramtypes "github.com/cosmos/cosmos-sdk/x/params/types"
 )
 
-func UpdateParams(ctx sdk.Context, paramStore *paramtypes.Subspace) error {
+func UpdateVault(ctx sdk.Context) error {
 	paramStore.Set(ctx, types.KeyValue, "")
 
 	return nil

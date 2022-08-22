@@ -14,9 +14,9 @@ func NewMigrator(keeper Keeper) Migrator {
 }
 
 func (m Migrator) Migrate3to4(ctx sdk.Context) error {
-	if err := v2.UpdateParams(ctx, &m.keeper.paramstore); err != nil {
+	if err := v2.UpdateVault(ctx); err != nil {
 		return err
 	}
 
-	return v2.MigrateStore(ctx, m.keeper.storeKey, m.keeper.cdc)
+	return v2.MigrateStore(ctx, m.keeper.key, m.keeper.cdc)
 }
