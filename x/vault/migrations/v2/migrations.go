@@ -1,6 +1,7 @@
 package v2
 
 import (
+	"github.com/comdex-official/comdex/x/vault/types"
 	"github.com/cosmos/cosmos-sdk/codec"
 	storetypes "github.com/cosmos/cosmos-sdk/store/types"
 	sdk "github.com/cosmos/cosmos-sdk/types"
@@ -8,7 +9,7 @@ import (
 )
 
 func UpdateParams(ctx sdk.Context, paramStore *paramtypes.Subspace) error {
-	paramStore.Set(ctx, types.KeyValue, "foobar")
+	paramStore.Set(ctx, types.KeyValue, "")
 
 	return nil
 }
