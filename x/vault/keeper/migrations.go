@@ -1,7 +1,7 @@
 package keeper
 
 import (
-	v4 "github.com/comdex-official/comdex/x/vault/migrations/v4"
+	v2 "github.com/comdex-official/comdex/x/vault/migrations/v2"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 )
 
@@ -14,9 +14,9 @@ func NewMigrator(keeper Keeper) Migrator {
 }
 
 func (m Migrator) Migrate3to4(ctx sdk.Context) error {
-	if err := v4.UpdateParams(ctx, &m.keeper.paramstore); err != nil {
+	if err := v2.UpdateParams(ctx, &m.keeper.paramstore); err != nil {
 		return err
 	}
 
-	return v4.MigrateStore(ctx, m.keeper.storeKey, m.keeper.cdc)
+	return v2.MigrateStore(ctx, m.keeper.storeKey, m.keeper.cdc)
 }
