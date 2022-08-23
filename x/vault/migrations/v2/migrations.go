@@ -1,12 +1,11 @@
 package v2
 
 import (
-	"github.com/cosmos/cosmos-sdk/codec"
-	storetypes "github.com/cosmos/cosmos-sdk/store/types"
-	sdk "github.com/cosmos/cosmos-sdk/types"
+	vaultV01Types "github.com/comdex-official/comdex/x/vault/migrations/v1/types"
+	"github.com/comdex-official/comdex/x/vault/types"
 )
 
-func MigrateStore(ctx sdk.Context, storeKey storetypes.StoreKey, cdc codec.BinaryCodec) error {
+/*func MigrateStore(ctx sdk.Context, storeKey storetypes.StoreKey, cdc codec.BinaryCodec) error {
 	store := ctx.KVStore(storeKey)
 
 	return migrateVault(store, cdc)
@@ -25,4 +24,13 @@ func migrateVault(store sdk.KVStore, cdc codec.BinaryCodec) error {
 	}
 
 	return nil
+}*/
+
+func MigrateJSON(oldState vaultV01Types.GenesisState) types.GenesisState {
+	return types.GenesisState{
+		Vaults:                      nil,
+		StableMintVault:             nil,
+		AppExtendedPairVaultMapping: nil,
+		UserVaultAssetMapping:       nil,
+	}
 }
